@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+
+	<link rel="stylesheet" type="text/css" href="/assets/styles/main.css">
+
+	<script>
+		window.configuration = {
+			ODataEndpoint: '{{ configuration.ODataEndpoint }}'
+		};
+	</script>
+
+	<!-- common js libraries -->
+	<script src="/common/js/q"></script>
+	<script src="/common/js/o"></script>
+	<script src="/common/js/jquery"></script>
+	<script src="/common/js/bootstrap"></script>
+	<script src="/common/js/knockout"></script>
+
+	<!-- common css stylesheets -->
+	<link rel="stylesheet" type="text/css" href="/common/css/bootstrap/css/bootstrap.css">
+	<link rel="stylesheet" type="text/css" href="/common/css/bootstrap/css/bootstrap-theme.css">
+</head>
+
+<body>
+	{{>header}}
+
+	{{$content}}
+	{{/content}}
+
+	{{>footer}}
+</body>
+</html>

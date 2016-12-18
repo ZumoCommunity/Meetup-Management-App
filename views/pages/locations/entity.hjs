@@ -1,0 +1,7 @@
+{{<layout}}
+{{$content}}
+
+<h1>Location entity</h1>
+
+{{/content}}
+{{/layout}}

@@ -1,0 +1,7 @@
+{{<layout}}
+{{$content}}
+
+<h1>Meetups list</h1>
+
+{{/content}}
+{{/layout}}

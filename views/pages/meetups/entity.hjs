@@ -1,0 +1,7 @@
+{{<layout}}
+{{$content}}
+
+<h1>Meetup entity</h1>
+
+{{/content}}
+{{/layout}}

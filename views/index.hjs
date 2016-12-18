@@ -1,0 +1,7 @@
+{{<layout}}
+{{$content}}
+
+<h1>Index</h1>
+
+{{/content}}
+{{/layout}}
