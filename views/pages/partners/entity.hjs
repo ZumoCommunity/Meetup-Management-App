@@ -1,0 +1,26 @@
+{{<layout}}
+{{$content}}
+
+<div class="container-fluid">
+    <h1>Partners entity</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label for="partnerTitle">Partner Title</label>
+                <input type="text" class="form-control" id="partnerTitle" placeholder="Partner Title">
+                <label for="partnerDescription">Partner Description</label>
+                <input type="text" class="form-control" id="partnerDescription" placeholder="Partner Description">
+                <label for="partnerLogoUrl">Partner Logo Url</label>
+                <input type="file" id="partnerLogoUrl">
+                <label for="partnerWebSiteUrl">Partner Web Site Url</label>
+                <input type="text" class="form-control" id="partnerDescription" placeholder="Partner Web Site Url">
+            </div>
+        </div>
+    </div>
+</div>
+
+{{/content}}
+{{/layout}}
