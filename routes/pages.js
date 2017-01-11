@@ -27,7 +27,11 @@ var routes = [
 	'meetups/list',
 	'meetups/entity',
 	'locations/list',
-	'locations/entity'
+	'locations/entity',
+	'partners/list',
+	'partners/entity',
+	'registrations/list',
+	'registrations/entity'
 ];
 
 function addRoute(url, view) {
