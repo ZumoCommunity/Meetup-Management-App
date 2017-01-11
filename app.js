@@ -27,9 +27,14 @@ app.use('/common/js/o', express.static(path.join(__dirname, 'node_modules', 'o.j
 app.use('/common/js/jquery', express.static(path.join(__dirname, 'node_modules', 'jquery', 'dist', 'jquery.min.js')));
 app.use('/common/js/bootstrap', express.static(path.join(__dirname, 'node_modules', 'bootstrap', 'dist', 'js', 'bootstrap.min.js')));
 app.use('/common/js/knockout', express.static(path.join(__dirname, 'node_modules', 'knockout', 'build', 'output', 'knockout-latest.js')));
+app.use('/common/js/moment', express.static(path.join(__dirname, 'node_modules', 'moment', 'min', 'moment.min.js')));
+app.use('/common/js/datepicker', express.static(path.join(__dirname, 'node_modules', 'eonasdan-bootstrap-datetimepicker', 'build', 'js', 'bootstrap-datetimepicker.min.js')));
+app.use('/common/js/guid', express.static(path.join(__dirname, 'node_modules', 'guid', 'guid.js')));
+app.use('/common/js/uri', express.static(path.join(__dirname, 'node_modules', 'urijs', 'src', 'URI.min.js')));
 
 app.use('/common/css/bootstrap/css', express.static(path.join(__dirname, 'node_modules', 'bootstrap', 'dist', 'css')));
 app.use('/common/css/bootstrap/fonts', express.static(path.join(__dirname, 'node_modules', 'bootstrap', 'dist', 'fonts')));
+app.use('/common/css/datepicker', express.static(path.join(__dirname, 'node_modules', 'eonasdan-bootstrap-datetimepicker', 'build', 'css')));
 
 var pages = require('./routes/pages');
 app.use('/', pages);
