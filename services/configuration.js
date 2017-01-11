@@ -4,13 +4,15 @@ nconf
 	.argv()
 	.env()
 	.defaults({
-		'ODataEndpoint' : '',
+		'ODataApiEndpoint' : '',
+		'StorageApiEndpoint': '',
 		'Environment': 'dev'
 	});
 
 var configurationData = {};
 
-configurationData.ODataEndpoint = nconf.get('ODataEndpoint');
+configurationData.ODataApiEndpoint = nconf.get('ODataApiEndpoint');
+configurationData.StorageApiEndpoint = nconf.get('StorageApiEndpoint');
 configurationData.Environment = nconf.get('Environment');
 
 module.exports = configurationData;

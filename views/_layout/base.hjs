@@ -7,7 +7,8 @@
 
 	<script>
 		window.configuration = {
-			ODataEndpoint: '{{ configuration.ODataEndpoint }}'
+			ODataApiEndpoint: '{{ configuration.ODataApiEndpoint }}',
+			StorageApiEndpoint: '{{ configuration.StorageApiEndpoint }}'
 		};
 	</script>
 
