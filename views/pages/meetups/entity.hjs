@@ -1,7 +1,60 @@
 {{<layout}}
 {{$content}}
 
-<h1>Meetup entity</h1>
+<div class="container-fluid">
+    <h1>MeetupS entity</h1>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12">
+            <div class="form-group">
+                <label for="meetupTitle">Meetup Title</label>
+                <input type="text" class="form-control" id="meetupTitle" placeholder="Title">
+                <label for="meetupURI">Meetup URI</label>
+                <input type="text" class="form-control" id="meetupURI" placeholder="URI">
+                <label for="MeetupId">Meetup Id</label>
+            </div>
+
+            <div class="form-group col-xs-12 col-md-6">
+                <label for="meetupDateTimeBegin">Meetup Date/Time begin</label>
+                <div class='input-group date' id='datetimepicker1'>
+                    <input id="meetupDateTimeBegin" type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                </div>
+            </div>
+
+            <div class="form-group col-xs-12 col-md-6">
+                <label for="meetupDateTimeEnd">Meetup Date/Time end</label>
+                <div class='input-group date' id='datetimepicker2'>
+                    <input id="meetupDateTimeEnd" type='text' class="form-control" />
+                            <span class="input-group-addon">
+                                <span class="glyphicon glyphicon-calendar"></span>
+                            </span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="meetupLocation">Meetup Location</label>
+                <select class="form-control" id="meetupLocation">
+                    <option>location A</option>
+                    <option>location B</option>
+                </select>
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script type="text/javascript">
+    $(function () {
+        $('#datetimepicker1').datetimepicker();
+        $('#datetimepicker2').datetimepicker();
+    });
+</script>
+
 
 {{/content}}
 {{/layout}}
