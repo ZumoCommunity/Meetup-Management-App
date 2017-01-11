@@ -1,3 +1,39 @@
 body {
 	padding: 50px;
+	font-size: 1.1em;
+}
+
+
+/* LOCATIONS */
+
+.locationsListContainer {
+
+}
+
+.locationsListContainer {
+	border: 1px #c1e2b3 dotted;
+}
+
+.locationListHeader {
+	font-size: 1.4em;
+	font-weight: bold;
+	padding: 10px;
+}
+
+.locationListRow {
+	font-size: 1.2em;
+	padding: 3px 3px 3px 10px;
+	border-bottom: 1px #c1e2b3 dotted;
+}
+
+.locationsListContainer > div:last-child {
+	border-bottom: none;
+}
+
+.locationListRow:hover {
+	background-color: #c1e2b3;
+}
+
+.locationsTopBar {
+	padding: 10px;
 }
