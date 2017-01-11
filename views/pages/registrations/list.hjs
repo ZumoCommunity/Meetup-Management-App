@@ -1,0 +1,9 @@
+{{<layout}}
+{{$content}}
+
+    <div class="container-fluid">
+        <h1>Registrations list</h1>
+    </div>
+
+{{/content}}
+{{/layout}}

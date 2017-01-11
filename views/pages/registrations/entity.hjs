@@ -1,0 +1,31 @@
+{{<layout}}
+{{$content}}
+
+    <div class="container-fluid">
+        <h1>Registrations entity</h1>
+    </div>
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-12">
+                <div class="form-group">
+                    <label for="registrationsEmail">Email</label>
+                    <input type="text" class="form-control" id="registrationsEmail" placeholder="Email">
+                    <label for="registrationsFullName">Full Name</label>
+                    <input type="text" class="form-control" id="registrationsFullName" placeholder="Full Name">
+                </div>
+                <div class="form-group col-xs-12">
+                    <input id="registrationsIsSubscribeForNews" type="checkbox" value="">
+                    <label for="registrationsIsSubscribeForNews">Subscribed To News</label>
+                </div>
+                <div class="form-group">
+                    <label for="registrationsMeetupId">Registration Meetup Id</label>
+                    <input type="text" class="form-control" id="registrationsMeetupId" placeholder="Registration Meetup Id" readonly>
+                    <label for="registrationId">Registration Id</label>
+                </div>
+            </div>
+        </div>
+    </div>
+
+{{/content}}
+{{/layout}}
