@@ -1,7 +1,95 @@
 {{<layout}}
 {{$content}}
 
-<h1>Locations list</h1>
+<div class="container-fluid">
+    <h1>Locations list</h1>
+</div>
+
+<div class="container-fluid locationsTopBar">
+    <div class="row">
+        <div class="col-xs-12 btn-group" role="group" aria-label="create location buttons">
+            <a href="/locations/entity" class="btn btn-success">Create new location</a>
+            <button type="button" class="btn btn-default" data-bind="click: getLocations">Refresh</button>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid locationsListContainer">
+    <div class="row locationListHeader">
+        <div class="col-xs-4">
+            Title
+        </div>
+        <div class="col-xs-4">
+            Address
+        </div>
+        <div class="col-xs-4">
+            &nbsp;
+        </div>
+    </div>
+    <div data-bind="visible: !isLocationsLoaded()">
+        Please wait...
+    </div>
+    <div data-bind="foreach: locations, visible: isLocationsLoaded()">
+        <div class="row locationListRow">
+            <div class="col-xs-4" data-bind="text: Title">
+            </div>
+            <div class="col-xs-4" data-bind="text: Address">
+            </div>
+            <div class="col-xs-4 btn-group" role="group" aria-label="location buttons">
+                <a class="btn btn-warning" data-bind="attr: { href: '/locations/entity?id=' + Id }">Edit</a>
+                <button type="button" class="btn btn-danger" data-bind="click: $parent.deleteLocation">Delete</button>
+                <a class="btn btn-success">Create a Meetup</a>
+                <a class="btn btn-default">Show Meetups</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    o().config({
+        endpoint: 'http://meetup-api-odata-bt3zb4in62g5m.azurewebsites.net/odata'
+    });
+
+    var viewModel = {
+        locations: ko.observableArray([]),
+
+        isLocationsLoaded: ko.observable(true),
+
+        getLocations: function(){
+            viewModel.isLocationsLoaded(false);
+
+            var table = o('Locations');
+            table.orderBy('Title').get()
+                .then(function(response) {
+                    viewModel.locations.removeAll();
+
+                    var entities = response.data;
+                    entities.forEach(function(location){
+                        viewModel.locations.push(location);
+                    });
+
+                    viewModel.isLocationsLoaded(true);
+                });
+        },
+
+        deleteLocation: function(location) {
+            if (!confirm('Delete location ' + location.Title + '?')) {
+                return;
+            }
+
+            viewModel.isLocationsLoaded(false);
+            var table = o('Locations');
+            table.find(location.Id).remove().save()
+                .then(function() {
+                    viewModel.getLocations();
+                });
+        }
+    };
+
+    viewModel.getLocations();
+
+    ko.applyBindings(viewModel);
+</script>
 
 {{/content}}
 {{/layout}}
