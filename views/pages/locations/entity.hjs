@@ -37,7 +37,7 @@
 
 <script>
     o().config({
-        endpoint: 'http://meetup-api-odata-bt3zb4in62g5m.azurewebsites.net/odata'
+        endpoint: window.configuration.ODataApiEndpoint
     });
 
     var viewModel = {

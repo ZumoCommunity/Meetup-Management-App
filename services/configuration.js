@@ -4,7 +4,7 @@ nconf
 	.argv()
 	.env()
 	.defaults({
-		'ODataApiEndpoint' : '',
+		'ODataApiEndpoint' : 'http://meetup-api-odata-p6g7a5qcxvlna.azurewebsites.net/odata/v1',
 		'StorageApiEndpoint': '',
 		'Environment': 'dev'
 	});
