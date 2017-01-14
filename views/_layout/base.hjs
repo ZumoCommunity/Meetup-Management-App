@@ -22,6 +22,8 @@
     <script src="/common/js/guid"></script>
     <script src="/common/js/uri"></script>
 
+    <!-- project js -->
+    <script src="/assets/js/grids.js"></script>
 
 	<!-- common css stylesheets -->
 	<link rel="stylesheet" type="text/css" href="/common/css/bootstrap/css/bootstrap.css">
