@@ -17,7 +17,7 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div  data-bind="css: { 'has-error': !isTitleValid() }">
+            <div class="form-group" data-bind="css: { 'has-error': !isTitleValid() }">
                 <label class="control-label" for="locationTitle">Location Title</label>
                 <input type="text" class="form-control" id="locationTitle" placeholder="Title" data-bind="textInput: Title">
             </div>
