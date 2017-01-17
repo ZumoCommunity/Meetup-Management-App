@@ -1,3 +1,20 @@
+/**
+ * @typeof      {Object}    GridViewModel
+ * @property    {object}    grid
+ * @property    {array}     grid.gridArray
+ */
+
+/**
+ * Extends view model with grid view model behavior
+ * @param       {object} vm
+ *              view model
+ * @param       {string} OSource
+ *              data source table name
+ * @param       {string} OOrderBy
+ *              table field name for ordering
+ * @returns     {GridViewModel}
+ *              View model extended with grid view model behavior
+ */
 function addGridBehavior (vm, OSource, OOrderBy) {
     var viewModel = vm;
 
