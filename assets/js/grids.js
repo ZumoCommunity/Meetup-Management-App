@@ -11,8 +11,7 @@ function addGridBehavior (vm, OSource, OOrderBy) {
     viewModel.grid.totalPagesArray = ko.observableArray([]);
     viewModel.grid.OSource = OSource;
     viewModel.grid.OOrderBy = OOrderBy;
-    
-    
+
     viewModel.grid.getGridPage = function(pageNumber){
         viewModel.grid.isGridLoaded(false);
 
@@ -63,10 +62,9 @@ function addGridBehavior (vm, OSource, OOrderBy) {
     viewModel.grid.pageIsActive = function (pageLink) {
         if (pageLink == viewModel.grid.currentPage()) {
             return true;
+        } else {
+            return false;
         }
-            else {
-                return false;
-            }
     };
 
     viewModel.grid.deleteItem = function (item) {
