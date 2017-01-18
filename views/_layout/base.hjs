@@ -7,7 +7,8 @@
 
 	<script>
 		window.configuration = {
-			ODataApiEndpoint: '{{ configuration.ODataApiEndpoint }}'
+			ODataApiEndpoint: '{{ configuration.ODataApiEndpoint }}',
+            ODataApiMetadataEndpoint: '{{ configuration.ODataApiMetadataEndpoint }}'
 		};
 	</script>
 
@@ -24,6 +25,7 @@
 
     <!-- project js -->
     <script src="/assets/js/grids.js"></script>
+    <script src="/assets/js/entities.js"></script>
 
 	<!-- common css stylesheets -->
 	<link rel="stylesheet" type="text/css" href="/common/css/bootstrap/css/bootstrap.css">
