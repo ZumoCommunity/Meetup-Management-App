@@ -1,0 +1,35 @@
+body {
+	padding: 50px;
+	font-size: 1.1em;
+}
+
+
+/* LOCATIONS */
+
+.listContainer {
+	border: 1px #c1e2b3 dotted;
+}
+
+.listHeader {
+	font-size: 1.4em;
+	font-weight: bold;
+	padding: 10px;
+}
+
+.listRow {
+	font-size: 1.2em;
+	padding: 3px 3px 3px 10px;
+	border-bottom: 1px #c1e2b3 dotted;
+}
+
+.listContainer > div:last-child {
+	border-bottom: none;
+}
+
+.listRow:hover {
+	background-color: #c1e2b3;
+}
+
+.topBar {
+	padding: 10px;
+}

@@ -1,0 +1,68 @@
+{{<layout}}
+{{$content}}
+
+<div class="container-fluid">
+    <h1>Partners entity</h1>
+</div>
+
+<div class="container-fluid topBar">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 btn-group" role="group" aria-label="save partner buttons">
+            <button type="button" class="btn btn-success" data-bind="click: entity.saveItem, enable: isFormValid">Save</button>
+            <a href="/partners/list" class="btn btn-default" data-bind="click: entity.redirectToList">Cancel</a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group">
+                <div class="form-group" data-bind="css: { 'has-error': !isTitleValid() }">
+                    <label class="control-label" for="partnerTitle">Partner Title</label>
+                    <input type="text" class="form-control" id="partnerTitle" placeholder="Partner Title" data-bind="textInput: entity.model.Title">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="partnerDescription">Partner Description</label>
+                    <input type="text" class="form-control" id="partnerDescription" placeholder="Partner Description" data-bind="textInput: entity.model.Description">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="partnerLogoUrl">Partner Logo Url</label>
+                    <input type="file" id="partnerLogoUrl">
+                </div>
+                <div class="form-group">
+                    <label class="control-label" for="partnerWebSiteUrl">Partner Web Site Url</label>
+                    <input type="text" class="form-control" id="partnerDescription" placeholder="Partner Web Site Url" data-bind="textInput: entity.model.WebSiteUrl">
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    o().config({
+        endpoint: window.configuration.ODataApiEndpoint
+    });
+
+    var viewModel = {
+    };
+
+    viewModel = addEntityBehavior(viewModel, 'Partners', 'Partner');
+
+    viewModel.entity.loadItem()
+        .then(function(){
+            viewModel.isTitleValid = ko.computed(function(){
+                return viewModel.entity.model.Title();
+            });
+
+            viewModel.isFormValid = ko.computed(function() {
+                return viewModel.isTitleValid();
+            });
+
+            ko.applyBindings(viewModel);
+        });
+
+</script>
+
+{{/content}}
+{{/layout}}

@@ -1,0 +1,28 @@
+{
+  "name": "meetup-management-app",
+  "version": "0.0.0",
+  "private": true,
+  "scripts": {
+    "start": "node ./bin/www"
+  },
+  "dependencies": {
+    "body-parser": "~1.15.2",
+    "bootstrap": "^3.3.7",
+    "cookie-parser": "~1.4.3",
+    "debug": "~2.2.0",
+    "eonasdan-bootstrap-datetimepicker": "^4.17.43",
+    "express": "~4.14.0",
+    "guid": "0.0.12",
+    "hjs": "~0.0.6",
+    "html-minifier": "^3.2.3",
+    "jquery": "^3.1.1",
+    "knockout": "^3.4.1",
+    "moment": "^2.17.1",
+    "morgan": "~1.7.0",
+    "nconf": "^0.8.4",
+    "o.js": "^0.2.2",
+    "q": "^1.4.1",
+    "serve-favicon": "~2.3.0",
+    "urijs": "^1.18.4"
+  }
+}
