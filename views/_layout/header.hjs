@@ -17,7 +17,7 @@
             <ul class="nav navbar-nav">
                 <li class="active"><a href="/Meetups/List">Meetups <span class="sr-only">(current)</span></a></li>
                 <li><a href="/Locations/List">Locations</a></li>
-                <li><a href="/Speakers">Speakers</a></li>
+                <li><a href="/Speakers/List">Speakers</a></li>
                 <li><a href="/Registrations">Registrations</a></li>
                 <li><a href="/Partners/List">Partners</a></li>
             </ul>

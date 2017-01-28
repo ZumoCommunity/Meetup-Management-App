@@ -1,0 +1,91 @@
+{{<layout}}
+{{$content}}
+
+<div class="container-fluid">
+    <h1>Speakers list</h1>
+</div>
+
+<div class="container-fluid topBar">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 btn-group" role="group" aria-label="create speaker buttons">
+            <a href="/speakers/entity" class="btn btn-success">Create new speaker</a>
+            <button type="button" class="btn btn-default" data-bind="click: grid.refreshGridPage">Refresh</button>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid listContainer">
+    <div class="row listHeader">
+        <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">
+            Full Name
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            Bio
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            Email
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            Photo
+        </div>
+        <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4">
+            &nbsp;
+        </div>
+    </div>
+    <div data-bind="visible: !grid.isGridLoaded()">
+        Please wait...
+    </div>
+    <div data-bind="foreach: grid.gridArray, visible: grid.isGridLoaded()">
+        <div class="row listRow">
+            <div class="col-xs-1 col-sm-1 col-md-1 col-lg-1" data-bind="text: FullName">
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-bind="text: Bio">
+            </div>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" data-bind="text: Email">
+            </div>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                <img class="img-responsive" data-bind="attr: {src: PhotoUrl, alt: FullName}" />
+            </div>
+            <div class="col-xs-4 col-sm-4 col-md-4 col-lg-4 btn-group" role="group" aria-label="speaker buttons">
+                <a class="btn btn-warning" data-bind="attr: { href: '/speakers/entity?id=' + Id }">Edit</a>
+                <button type="button" class="btn btn-danger" data-bind="click: $parent.grid.deleteItem">Delete</button>
+                <a class="btn btn-success">Create a topic</a>
+                <a class="btn btn-default">Show topics</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <nav aria-label="Page navigation">
+                <ul class="pagination" data-bind="foreach: grid.totalPagesArray">
+                    <li data-bind="css: { 'active': $parent.grid.pageIsActive($data) }">
+                        <a href="#" data-bind="click: $parent.grid.navigateToItemPage"><span data-bind="text: $data"></span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<script>
+    o().config({
+        endpoint: window.configuration.ODataApiEndpoint
+    });
+
+    var viewModel = {
+
+    };
+
+    viewModel = addGridBehavior(viewModel, 'Speakers', 'FullName');
+
+    viewModel.grid.getGridPage(viewModel.grid.currentPage());
+
+    ko.applyBindings(viewModel);
+</script>
+
+
+{{/content}}
+{{/layout}}
