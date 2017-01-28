@@ -8,8 +8,8 @@
 <div class="container-fluid topBar">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 btn-group" role="group" aria-label="save location buttons">
-            <button type="button" class="btn btn-success" data-bind="click: saveLocation, enable: isFormValid">Save</button>
-            <a href="/locations/list" class="btn btn-default">Cancel</a>
+            <button type="button" class="btn btn-success" data-bind="click: entity.saveItem, enable: isFormValid">Save</button>
+            <a href="/locations/list" class="btn btn-default" data-bind="click: entity.redirectToList">Cancel</a>
         </div>
     </div>
 </div>
@@ -19,15 +19,15 @@
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="form-group" data-bind="css: { 'has-error': !isTitleValid() }">
                 <label class="control-label" for="locationTitle">Location Title</label>
-                <input type="text" class="form-control" id="locationTitle" placeholder="Title" data-bind="textInput: Title">
+                <input type="text" class="form-control" id="locationTitle" placeholder="Title" data-bind="textInput: entity.model.Title">
             </div>
-            <div class="form-group" data-bind="css: { 'has-error': !isAddressValid() }">
+            <div class="form-group">
                 <label class="control-label" for="locationAddress">Location Address</label>
-                <input type="text" class="form-control" id="locationAddress" placeholder="Location Address" data-bind="textInput: Address">
+                <input type="text" class="form-control" id="locationAddress" placeholder="Location Address" data-bind="textInput: entity.model.Address">
             </div>
             <div class="form-group">
                 <label class="control-label" for="locationAddressAdditionalDirections">Location Address Additional Directions</label>
-                <input type="text" class="form-control" id="locationAddressAdditionalDirections" placeholder="Location Address Additional Directions" data-bind="textInput: AdditionalDirections">
+                <input type="text" class="form-control" id="locationAddressAdditionalDirections" placeholder="Location Address Additional Directions" data-bind="textInput: entity.model.AdditionalDirections">
                 <!--<label for="locationAddressLatitude">Location Address Latitude</label>-->
                 <!--<label for="locationAddressLongitude">Location Address Longitude</label>-->
             </div>
@@ -40,84 +40,102 @@
         endpoint: window.configuration.ODataApiEndpoint
     });
 
+//    var viewModel = {
+//        Id: ko.observable(Guid.raw()),
+//        Title: ko.observable(''),
+//        Address: ko.observable(''),
+//        AdditionalDirections: ko.observable(''),
+//        Latitude: ko.observable(0),
+//        Longitude: ko.observable(0),
+//
+//        isEditMode: false,
+//
+//        getLocation: function() {
+//            var uri = new URI(window.location.search);
+//            var query = uri.query(true);
+//
+//            var currentLocationId = query.id;
+//            viewModel.isEditMode = !!currentLocationId;
+//            if (!viewModel.isEditMode) {
+//                return;
+//            }
+//
+//            var table = o('Locations');
+//            table.find(currentLocationId).get()
+//                .then(function(response) {
+//                    var entity = response.data;
+//
+//                    viewModel.Id(entity.Id);
+//                    viewModel.Title(entity.Title);
+//                    viewModel.Address(entity.Address);
+//                    viewModel.AdditionalDirections(entity.AdditionalDirections);
+//                    viewModel.Latitude(entity.Latitude);
+//                    viewModel.Longitude(entity.Longitude);
+//                })
+//        },
+//        saveLocation: function() {
+//            var entity = {
+//                Id: viewModel.Id(),
+//                Title: viewModel.Title(),
+//                Address: viewModel.Address(),
+//                AdditionalDirections: viewModel.AdditionalDirections(),
+//                Latitude: viewModel.Latitude(),
+//                Longitude: viewModel.Longitude()
+//            };
+//
+//            var table = o('Locations');
+//
+//            if (viewModel.isEditMode) {
+//                table.find(entity.Id).patch(entity).save()
+//                    .then(function(){
+//                        viewModel.redirectToList();
+//                    });
+//            } else {
+//                table.post(entity).save()
+//                    .then(function(){
+//                        viewModel.redirectToList();
+//                    });
+//            }
+//        },
+//        redirectToList: function() {
+//            window.location.href = '/locations/list';
+//        }
+//    };
+//
+//    viewModel.isTitleValid = ko.computed(function(){
+//        return !!viewModel.Title();
+//    });
+//
+//    viewModel.isAddressValid = ko.computed(function(){
+//        return !!viewModel.Address();
+//    });
+//
+//    viewModel.isFormValid = ko.computed(function() {
+//        return viewModel.isTitleValid() && viewModel.isAddressValid();
+//    });
+//
+//
+//    viewModel.getLocation();
+//
+//    ko.applyBindings(viewModel);
+
     var viewModel = {
-        Id: ko.observable(Guid.raw()),
-        Title: ko.observable(''),
-        Address: ko.observable(''),
-        AdditionalDirections: ko.observable(''),
-        Latitude: ko.observable(0),
-        Longitude: ko.observable(0),
-
-        isEditMode: false,
-
-        getLocation: function() {
-            var uri = new URI(window.location.search);
-            var query = uri.query(true);
-
-            var currentLocationId = query.id;
-            viewModel.isEditMode = !!currentLocationId;
-            if (!viewModel.isEditMode) {
-                return;
-            }
-
-            var table = o('Locations');
-            table.find(currentLocationId).get()
-                .then(function(response) {
-                    var entity = response.data;
-
-                    viewModel.Id(entity.Id);
-                    viewModel.Title(entity.Title);
-                    viewModel.Address(entity.Address);
-                    viewModel.AdditionalDirections(entity.AdditionalDirections);
-                    viewModel.Latitude(entity.Latitude);
-                    viewModel.Longitude(entity.Longitude);
-                })
-        },
-        saveLocation: function() {
-            var entity = {
-                Id: viewModel.Id(),
-                Title: viewModel.Title(),
-                Address: viewModel.Address(),
-                AdditionalDirections: viewModel.AdditionalDirections(),
-                Latitude: viewModel.Latitude(),
-                Longitude: viewModel.Longitude()
-            };
-
-            var table = o('Locations');
-
-            if (viewModel.isEditMode) {
-                table.find(entity.Id).patch(entity).save()
-                    .then(function(){
-                        viewModel.redirectToList();
-                    });
-            } else {
-                table.post(entity).save()
-                    .then(function(){
-                        viewModel.redirectToList();
-                    });
-            }
-        },
-        redirectToList: function() {
-            window.location.href = '/locations/list';
-        }
     };
 
-    viewModel.isTitleValid = ko.computed(function(){
-        return !!viewModel.Title();
-    });
+    viewModel = addEntityBehavior(viewModel, 'Locations', 'Location');
 
-    viewModel.isAddressValid = ko.computed(function(){
-        return !!viewModel.Address();
-    });
+    viewModel.entity.loadItem()
+            .then(function(){
+                viewModel.isTitleValid = ko.computed(function(){
+                    return viewModel.entity.model.Title();
+                });
 
-    viewModel.isFormValid = ko.computed(function() {
-        return viewModel.isTitleValid() && viewModel.isAddressValid();
-    });
+                viewModel.isFormValid = ko.computed(function() {
+                    return viewModel.isTitleValid();
+                });
 
-
-    viewModel.getLocation();
-
-    ko.applyBindings(viewModel);
+                ko.applyBindings(viewModel);
+            });
 
 </script>
 
