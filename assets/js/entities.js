@@ -147,7 +147,7 @@ function addEntityBehavior(vm, OSource, ODefinition) {
                 var propertyName = validationProperties[k];
 
                 var validationResult = viewModel.entity.Validation[propertyName]();
-                console.log(propertyName + ' = ' + validationResult);
+                // console.log(propertyName + ' = ' + validationResult);
 
                 formState = formState && validationResult;
             }
