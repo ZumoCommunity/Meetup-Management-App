@@ -15,7 +15,7 @@
  * @returns     {GridViewModel}
  *              View model extended with grid view model behavior
  */
-function addGridBehavior (vm, OSource, OOrderBy) {
+function addGridBehavior (vm, OSource, OOrderBy, OExpand) {
     var viewModel = vm;
 
     viewModel.grid = {};
@@ -28,6 +28,8 @@ function addGridBehavior (vm, OSource, OOrderBy) {
     viewModel.grid.totalPagesArray = ko.observableArray([]);
     viewModel.grid.OSource = OSource;
     viewModel.grid.OOrderBy = OOrderBy;
+    // expand grid
+    viewModel.grid.OExpand = OExpand;
 
     viewModel.grid.getGridPage = function(pageNumber){
         viewModel.grid.isGridLoaded(false);
@@ -38,7 +40,15 @@ function addGridBehavior (vm, OSource, OOrderBy) {
 
         var table = o(viewModel.grid.OSource);
 
-        table.top(viewModel.grid.pageSize).skip(itemsToSkip).orderBy(viewModel.grid.OOrderBy).inlineCount('true').get()
+        table = table.top(viewModel.grid.pageSize).skip(itemsToSkip).orderBy(viewModel.grid.OOrderBy).inlineCount('true');
+
+        // expand
+        if ( OExpand != undefined ) {
+            table = table.expand(OExpand);
+            console.log();
+        }
+
+        table.get()
             .then(function(response) {
                 viewModel.grid.gridArray.removeAll();
 
@@ -49,11 +59,14 @@ function addGridBehavior (vm, OSource, OOrderBy) {
                 viewModel.grid.populateTotalPagesArray(viewModel.grid.totalPages());
 
                 var entities = response.data;
-                entities.forEach(function(location){
-                    viewModel.grid.gridArray.push(location);
+                entities.forEach(function(entity){
+                    viewModel.grid.gridArray.push(entity);
                 });
 
                 viewModel.grid.isGridLoaded(true);
+
+                // log grid
+                console.log(viewModel.grid.gridArray());
             }, function (error) {
                 console.log(error);
             });

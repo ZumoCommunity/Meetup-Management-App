@@ -3,5 +3,94 @@
 
 <h1>Meetups list</h1>
 
+<div class="container-fluid topBar">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 btn-group" role="group" aria-label="create meetup buttons">
+            <a href="/meetup/entity" class="btn btn-success">Create new meetup</a>
+            <button type="button" class="btn btn-default" data-bind="click: grid.refreshGridPage">Refresh</button>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid listContainer">
+    <div class="row listHeader">
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            Title
+        </div>
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            DateTime
+        </div>
+        <!--<div class="col-xs-1 col-sm-1 col-md-1 col-lg-1">-->
+            <!--Uri-->
+        <!--</div>-->
+        <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+            Location
+        </div>
+        <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6">
+            &nbsp;
+        </div>
+    </div>
+    <div data-bind="visible: !grid.isGridLoaded()">
+        Please wait...
+    </div>
+    <div data-bind="foreach: grid.gridArray, visible: grid.isGridLoaded()">
+        <div class="row listRow">
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" data-bind="text: Title">
+            </div>
+            <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2">
+                From
+                <span data-bind="text: DateTimeBegin"></span>
+                to
+                <span data-bind="text: DateTimeEnd"></span>
+            </div>
+            <div>
+                <div class="col-xs-2 col-sm-2 col-md-2 col-lg-2" data-bind="text: Location.Title">
+            </div>
+            <div class="col-xs-6 col-sm-6 col-md-6 col-lg-6 btn-group" role="group" aria-label="meetup buttons">
+                <a class="btn btn-warning" data-bind="attr: { href: '/meetups/entity?id=' + Id }">Edit</a>
+                <button type="button" class="btn btn-danger" data-bind="click: $parent.grid.deleteItem">Delete</button>
+                <a class="btn btn-default">View agenda items</a>
+                <a class="btn btn-success">View registrationss</a>
+                <a class="btn btn-default">View partners</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <nav aria-label="Page navigation">
+                <ul class="pagination" data-bind="foreach: grid.totalPagesArray">
+                    <li data-bind="css: { 'active': $parent.grid.pageIsActive($data) }">
+                        <a href="#" data-bind="click: $parent.grid.navigateToItemPage"><span data-bind="text: $data"></span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<script>
+    o().config({
+        endpoint: window.configuration.ODataApiEndpoint
+    });
+
+    var viewModel = {
+
+    };
+
+    viewModel = addGridBehavior(viewModel, 'Meetups', 'DateTimeBegin', 'Location');
+
+    viewModel.grid.getGridPage(viewModel.grid.currentPage());
+
+    ko.applyBindings(viewModel);
+</script>
+
+
+
+
+
+
 {{/content}}
 {{/layout}}
