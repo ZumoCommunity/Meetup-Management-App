@@ -1,0 +1,80 @@
+{{<layout}}
+{{$content}}
+
+<div class="container-fluid">
+    <h1>Speaker entity</h1>
+</div>
+
+<div class="container-fluid topBar">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 btn-group" role="group" aria-label="save speaker buttons">
+            <button type="button" class="btn btn-success" data-bind="click: entity.saveItem, enable: entity.Validation.isFormValid">Save</button>
+            <a href="/speakers/list" class="btn btn-default" data-bind="click: entity.redirectToList">Cancel</a>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <div class="form-group" data-bind="css: { 'has-error': !entity.Validation.isFullNameValid() }">
+                <label class="control-label" for="FullName">FullName</label>
+                <input type="text" class="form-control" id="FullName" placeholder="Full Name" data-bind="textInput: entity.model.FullName">
+            </div>
+            <div class="form-group" data-bind="css: { 'has-error': !entity.Validation.isBioValid() }">
+                <label class="control-label" for="Bio">Bio</label>
+                <input type="text" class="form-control" id="Bio" placeholder="Bio" data-bind="textInput: entity.model.Bio">
+            </div>
+            <div class="form-group" data-bind="css: { 'has-error': !entity.Validation.isEmailValid() }">
+                <label class="control-label" for="Email">Email</label>
+                <input type="text" class="form-control" id="Email" placeholder="Email" data-bind="textInput: entity.model.Email">
+            </div>
+            <div class="form-group" data-bind="css: { 'has-error': !entity.Validation.isPhotoUrlValid() }">
+                <label class="control-label" for="PhotoUrl">Photo</label>
+                <input type="text" class="form-control" id="PhotoUrl" placeholder="Url" data-bind="textInput: entity.model.PhotoUrl">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="FaceBookUrl">FaceBook Url</label>
+                <input type="text" class="form-control" id="FaceBookUrl" placeholder="Url" data-bind="textInput: entity.model.FaceBookUrl">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="GitHubUrl">GitHub Url</label>
+                <input type="text" class="form-control" id="GitHubUrl" placeholder="Url" data-bind="textInput: entity.model.GitHubUrl">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="LinkedInUrl">LinkedIn Url</label>
+                <input type="text" class="form-control" id="LinkedInUrl" placeholder="Url" data-bind="textInput: entity.model.LinkedInUrl">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="TwitterUrl">Twitter Url</label>
+                <input type="text" class="form-control" id="TwitterUrl" placeholder="Url" data-bind="textInput: entity.model.TwitterUrl">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="YouTubeUrl">YouTube Url</label>
+                <input type="text" class="form-control" id="YouTubeUrl" placeholder="Url" data-bind="textInput: entity.model.YouTubeUrl">
+            </div>
+
+        </div>
+    </div>
+</div>
+
+<script>
+    o().config({
+        endpoint: window.configuration.ODataApiEndpoint
+    });
+
+    var viewModel = {
+    };
+
+    viewModel = addEntityBehavior(viewModel, 'Speakers', 'Speaker');
+
+    viewModel.entity.loadItem()
+            .then(function(){
+
+                ko.applyBindings(viewModel);
+            });
+
+</script>
+
+{{/content}}
+{{/layout}}

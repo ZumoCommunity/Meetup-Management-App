@@ -8,7 +8,7 @@
 <div class="container-fluid topBar">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 btn-group" role="group" aria-label="save partner buttons">
-            <button type="button" class="btn btn-success" data-bind="click: entity.saveItem, enable: isFormValid">Save</button>
+            <button type="button" class="btn btn-success" data-bind="click: entity.saveItem, enable: entity.Validation.isFormValid">Save</button>
             <a href="/partners/list" class="btn btn-default" data-bind="click: entity.redirectToList">Cancel</a>
         </div>
     </div>
@@ -18,7 +18,7 @@
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
             <div class="form-group">
-                <div class="form-group" data-bind="css: { 'has-error': !isTitleValid() }">
+                <div class="form-group" data-bind="css: { 'has-error': !entity.Validation.isTitleValid() }">
                     <label class="control-label" for="partnerTitle">Partner Title</label>
                     <input type="text" class="form-control" id="partnerTitle" placeholder="Partner Title" data-bind="textInput: entity.model.Title">
                 </div>
@@ -51,13 +51,6 @@
 
     viewModel.entity.loadItem()
         .then(function(){
-            viewModel.isTitleValid = ko.computed(function(){
-                return viewModel.entity.model.Title();
-            });
-
-            viewModel.isFormValid = ko.computed(function() {
-                return viewModel.isTitleValid();
-            });
 
             ko.applyBindings(viewModel);
         });

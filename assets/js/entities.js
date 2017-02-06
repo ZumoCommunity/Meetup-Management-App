@@ -12,6 +12,7 @@ function addEntityBehavior(vm, OSource, ODefinition) {
     viewModel.entity.OSource = OSource;
     viewModel.entity.RedirectPathPrefix = OSource;
     viewModel.entity.ODefinition = ODefinition;
+    viewModel.entity.Validation = {};
 
     viewModel.entity.getMetadataFromApi = function() {
         function isPropertyTypeValid(propertyType) {
@@ -125,6 +126,38 @@ function addEntityBehavior(vm, OSource, ODefinition) {
 
             viewModel.entity.model[propertyName] = ko.observable(entity[propertyName]);
         }
+
+        for(var j = 0; j < metadata.required.length; j++) {
+            var name = metadata.required[j];
+            if (name != 'Id') {
+                viewModel.entity.Validation["is" + name + "Valid"] = (function(propName) {
+                    return ko.computed(function () {
+                        return !!viewModel.entity.model[propName]();
+                    })})(name);
+            }
+        }
+
+        var isFormValid = ko.computed(function () {
+            var formState = true;
+            var validationProperties = Object.keys(viewModel.entity.Validation).filter(function(propertyName) {
+                return propertyName != 'isFormValid';
+            });
+
+            for(var k = 0; k < validationProperties.length; k++) {
+                var propertyName = validationProperties[k];
+
+                var validationResult = viewModel.entity.Validation[propertyName]();
+                // console.log(propertyName + ' = ' + validationResult);
+
+                formState = formState && validationResult;
+            }
+
+            console.log(formState);
+
+            return formState;
+        });
+
+        viewModel.entity.Validation.isFormValid = isFormValid;
     };
 
     viewModel.entity.loadItem = function() {

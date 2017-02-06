@@ -31,7 +31,11 @@ var routes = [
 	'partners/list',
 	'partners/entity',
 	'registrations/list',
-	'registrations/entity'
+	'registrations/entity',
+	'speakers/list',
+	'speakers/entity',
+	'topics/list',
+	'topics/entity'
 ];
 
 function addRoute(url, view) {
