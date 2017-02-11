@@ -26,6 +26,7 @@
     <!-- project js -->
     <script src="/assets/js/grids.js"></script>
     <script src="/assets/js/entities.js"></script>
+    <script src="/assets/js/meetupEntity.js"></script>
 
 	<!-- common css stylesheets -->
 	<link rel="stylesheet" type="text/css" href="/common/css/bootstrap/css/bootstrap.css">

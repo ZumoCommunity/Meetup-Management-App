@@ -5,42 +5,52 @@
     <h1>MeetupS entity</h1>
 </div>
 
+<div class="container-fluid topBar">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 btn-group" role="group" aria-label="save meetup buttons">
+            <button type="button" class="btn btn-success" data-bind="click: entity.saveItem, enable: entity.Validation.isFormValid">Save</button>
+            <a href="/meetups/list" class="btn btn-default" data-bind="click: entity.redirectToList">Cancel</a>
+        </div>
+    </div>
+</div>
+
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12">
-            <div class="form-group">
+            <div class="form-group" data-bind="css: { 'has-error': !entity.Validation.isTitleValid() }">
                 <label for="meetupTitle">Meetup Title</label>
-                <input type="text" class="form-control" id="meetupTitle" placeholder="Title">
+                <input type="text" class="form-control" id="meetupTitle" placeholder="Title" data-bind="textInput: entity.model.Title">
+            </div>
+            <div class="form-group" data-bind="css: { 'has-error': !entity.Validation.isUriValid() }">
                 <label for="meetupURI">Meetup URI</label>
-                <input type="text" class="form-control" id="meetupURI" placeholder="URI">
-                <label for="MeetupId">Meetup Id</label>
+                <input type="text" class="form-control" id="meetupURI" placeholder="URI" data-bind="textInput: entity.model.Uri">
+                <!-- <label for="MeetupId">Meetup Id</label> -->
             </div>
 
             <div class="form-group col-xs-12 col-md-6">
                 <label for="meetupDateTimeBegin">Meetup Date/Time begin</label>
-                <div class='input-group date' id='datetimepicker1'>
-                    <input id="meetupDateTimeBegin" type='text' class="form-control" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
+                <div class="input-group date" id="datetimepicker1">
+                    <input id="meetupDateTimeBegin" type="text" class="form-control" data-bind="textInput: entity.model.DateTimeBegin" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
                 </div>
             </div>
 
             <div class="form-group col-xs-12 col-md-6">
                 <label for="meetupDateTimeEnd">Meetup Date/Time end</label>
                 <div class='input-group date' id='datetimepicker2'>
-                    <input id="meetupDateTimeEnd" type='text' class="form-control" />
-                            <span class="input-group-addon">
-                                <span class="glyphicon glyphicon-calendar"></span>
-                            </span>
+                    <input id="meetupDateTimeEnd" type='text' class="form-control" data-bind="textInput: entity.model.DateTimeEnd" />
+                        <span class="input-group-addon">
+                            <span class="glyphicon glyphicon-calendar"></span>
+                        </span>
                 </div>
             </div>
 
             <div class="form-group">
                 <label for="meetupLocation">Meetup Location</label>
-                <select class="form-control" id="meetupLocation">
-                    <option>location A</option>
-                    <option>location B</option>
+                <select class="form-control" id="meetupLocation" data-bind="value: entity.model.LocationId, foreach: { data: lists.locations }">
+                    <option data-bind="text: $data.Title, value: $data.Id"></option>
                 </select>
             </div>
 
@@ -49,10 +59,31 @@
 </div>
 
 <script type="text/javascript">
+    /* entity */
+    o().config({
+        endpoint: window.configuration.ODataApiEndpoint
+    });
+
+    var viewModel = {
+    };
+
+    viewModel = addMeetupEntityBehavior(viewModel, 'Meetups', 'Meetup');
+
+    viewModel.entity.loadItem()
+            .then(function(){
+
+                ko.applyBindings(viewModel);
+            });
+
+    /* dateTime */
     $(function () {
         $('#datetimepicker1').datetimepicker();
         $('#datetimepicker2').datetimepicker();
     });
+
+    /*
+    console.log(viewModel);
+    */
 </script>
 
 

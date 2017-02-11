@@ -6,7 +6,7 @@
 <div class="container-fluid topBar">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12 btn-group" role="group" aria-label="create meetup buttons">
-            <a href="/meetup/entity" class="btn btn-success">Create new meetup</a>
+            <a href="/meetups/entity" class="btn btn-success">Create new meetup</a>
             <button type="button" class="btn btn-default" data-bind="click: grid.refreshGridPage">Refresh</button>
         </div>
     </div>
