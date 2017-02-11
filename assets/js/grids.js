@@ -45,7 +45,6 @@ function addGridBehavior (vm, OSource, OOrderBy, OExpand) {
         // expand
         if ( OExpand != undefined ) {
             table = table.expand(OExpand);
-            console.log();
         }
 
         table.get()
