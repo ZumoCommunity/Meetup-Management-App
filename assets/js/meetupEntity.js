@@ -89,17 +89,15 @@ function addMeetupEntityBehavior(vm, OSource, ODefinition) {
         }
 
         var promise = new Promise(function (resolve, reject) {
-                /* expanding with locations */
-                var locations = o('Locations');
-                locations = locations.orderBy('Title').inlineCount('true');
-                locations.get()
-                    .then(function(response) {
-                        var entities = response.data;
-                        resolve(entities);
-                    })
-            }
-        );
-
+            /* expanding with locations */
+            var locations = o('Locations');
+            locations = locations.orderBy('Title').inlineCount('true');
+            locations.get()
+                .then(function(response) {
+                    var entities = response.data;
+                    resolve(entities);
+                })
+        });
         promises.push(promise);
 
         return Promise.all(promises);
