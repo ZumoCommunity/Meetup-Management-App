@@ -31,9 +31,6 @@
                 <label for="meetupDateTimeBegin">Meetup Date/Time begin</label>
                 <div class="input-group date" id="datetimepicker1">
                     <input id="meetupDateTimeBegin" type="text" class="form-control" data-bind="textInput: entity.model.DateTimeBegin" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
                 </div>
             </div>
 
@@ -41,9 +38,6 @@
                 <label for="meetupDateTimeEnd">Meetup Date/Time end</label>
                 <div class='input-group date' id='datetimepicker2'>
                     <input id="meetupDateTimeEnd" type='text' class="form-control" data-bind="textInput: entity.model.DateTimeEnd" />
-                        <span class="input-group-addon">
-                            <span class="glyphicon glyphicon-calendar"></span>
-                        </span>
                 </div>
             </div>
 
@@ -71,19 +65,14 @@
 
     viewModel.entity.loadItem()
             .then(function(){
+                var options = {
+                    enableTime: true
+                };
+                flatpickr('#meetupDateTimeBegin', options);
+                flatpickr('#meetupDateTimeEnd', options);
 
                 ko.applyBindings(viewModel);
             });
-
-    /* dateTime */
-    $(function () {
-        $('#datetimepicker1').datetimepicker();
-        $('#datetimepicker2').datetimepicker();
-    });
-
-    /*
-    console.log(viewModel);
-    */
 </script>
 
 

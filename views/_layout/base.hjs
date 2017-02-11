@@ -17,11 +17,10 @@
 	<script src="/common/js/o"></script>
 	<script src="/common/js/jquery"></script>
 	<script src="/common/js/bootstrap"></script>
-    <script src="/common/js/moment"></script>
 	<script src="/common/js/knockout"></script>
-    <script src="/common/js/datepicker"></script>
     <script src="/common/js/guid"></script>
     <script src="/common/js/uri"></script>
+    <script src="/common/js/flatpickr"></script>
 
     <!-- project js -->
     <script src="/assets/js/grids.js"></script>
@@ -30,8 +29,8 @@
 
 	<!-- common css stylesheets -->
 	<link rel="stylesheet" type="text/css" href="/common/css/bootstrap/css/bootstrap.css">
-	<link rel="stylesheet" type="text/css" href="/common/css/bootstrap/css/bootstrap-theme.css">
-    <link rel="stylesheet" type="text/css" href="/common/css/datepicker/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" type="text/css" href="/common/css/bootstrap/css/bootstrap-theme.css">
+    <link rel="stylesheet" type="text/css" href="/common/css/flatpickr">
 </head>
 
 <body>
