@@ -17,9 +17,13 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
-            <div class="form-group" data-bind="css: { 'has-error': !entity.Validation.isFullNameValid() }">
-                <label class="control-label" for="FullName">FullName</label>
-                <input type="text" class="form-control" id="FullName" placeholder="Full Name" data-bind="textInput: entity.model.FullName">
+            <div class="form-group" data-bind="css: { 'has-error': !entity.Validation.isLastNameValid() }">
+                <label class="control-label" for="LastName">Last Name</label>
+                <input type="text" class="form-control" id="LastName" placeholder="Last Name" data-bind="textInput: entity.model.LastName">
+            </div>
+            <div class="form-group" data-bind="css: { 'has-error': !entity.Validation.isFirstNameValid() }">
+                <label class="control-label" for="FirstName">First Name</label>
+                <input type="text" class="form-control" id="FirstName" placeholder="First Name" data-bind="textInput: entity.model.FirstName">
             </div>
             <div class="form-group" data-bind="css: { 'has-error': !entity.Validation.isBioValid() }">
                 <label class="control-label" for="Bio">Bio</label>
@@ -52,6 +56,10 @@
             <div class="form-group">
                 <label class="control-label" for="YouTubeUrl">YouTube Url</label>
                 <input type="text" class="form-control" id="YouTubeUrl" placeholder="Url" data-bind="textInput: entity.model.YouTubeUrl">
+            </div>
+            <div class="form-group">
+                <label class="control-label" for="MVPUrl">MVP Url</label>
+                <input type="text" class="form-control" id="MVPUrl" placeholder="Url" data-bind="textInput: entity.model.MvpUrl">
             </div>
 
         </div>
