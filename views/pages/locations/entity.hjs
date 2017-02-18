@@ -42,20 +42,16 @@
 </div>
 
 <script>
-    o().config({
-        endpoint: window.configuration.ODataApiEndpoint
-    });
-
     var viewModel = {
     };
 
     viewModel = addEntityBehavior(viewModel, 'Locations', 'Location');
 
-    viewModel.entity.loadItem()
-            .then(function(){
-
-                 ko.applyBindings(viewModel);
-            });
+    viewModel.entity
+        .loadItem()
+        .then(function(){
+             ko.applyBindings(viewModel);
+        });
 
 </script>
 

@@ -53,11 +53,6 @@
 </div>
 
 <script type="text/javascript">
-    /* entity */
-    o().config({
-        endpoint: window.configuration.ODataApiEndpoint
-    });
-
     var viewModel = {
     };
 

@@ -71,12 +71,7 @@
 </div>
 
 <script>
-    o().config({
-        endpoint: window.configuration.ODataApiEndpoint
-    });
-
     var viewModel = {
-
     };
 
     viewModel = addGridBehavior(viewModel, 'Speakers', 'FullName');
