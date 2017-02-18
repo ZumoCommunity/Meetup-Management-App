@@ -29,16 +29,24 @@
 
             <div class="form-group col-xs-12 col-md-6">
                 <label for="meetupDateTimeBegin">Meetup Date/Time begin</label>
-                <div class="input-group date" id="datetimepicker1">
-                    <input id="meetupDateTimeBegin" type="text" class="form-control" data-bind="textInput: entity.model.DateTimeBegin" />
+                <div class="input-group date">
+                    <input id="meetupDateTimeBegin" type='datetime' class="form-control" data-bind="datetimepicker: entity.model.DateTimeBegin" />
                 </div>
             </div>
 
             <div class="form-group col-xs-12 col-md-6">
                 <label for="meetupDateTimeEnd">Meetup Date/Time end</label>
-                <div class='input-group date' id='datetimepicker2'>
-                    <input id="meetupDateTimeEnd" type='text' class="form-control" data-bind="textInput: entity.model.DateTimeEnd" />
+                <div class='input-group date'>
+                    <input id="meetupDateTimeEnd" type='datetime' class="form-control" data-bind="datetimepicker: entity.model.DateTimeEnd" />
                 </div>
+            </div>
+
+            <div class="form-group">
+                <label for="meetupOwnershipType">Meetup Ownership Type</label>
+                <select class="form-control" id="meetupOwnershipType" data-bind="value: entity.model.MeetupOwnershipType">
+                    <option value="1">Own</option>
+                    <option value="2">Third-party</option>
+                </select>
             </div>
 
             <div class="form-group">
@@ -61,13 +69,45 @@
     viewModel.entity.loadItem()
             .then(function(){
                 var options = {
-                    enableTime: true
                 };
                 flatpickr('#meetupDateTimeBegin', options);
                 flatpickr('#meetupDateTimeEnd', options);
 
                 ko.applyBindings(viewModel);
             });
+
+    ko.bindingHandlers.datetimepicker = {
+        init: function(element, valueAccessor, allBindingsAccessor) {
+            var options = $.extend({
+                        utc: true,
+                        altInput: true,
+                        altFormat: "F j, Y h:i K",
+                        dateFormat: 'Y-m-dTH:iZ',
+                        enableTime: true
+                    }, allBindingsAccessor().datetimepickerOptions),
+                    $el = $(element),
+                    picker = new Flatpickr(element, options),
+                    observable = valueAccessor();
+
+            //handle field change by registering datepicker's changeDate event
+            ko.utils.registerEventHandler(element, "change", function() {
+                var d = new Date($el.val());
+                d = picker.parseDate(d);
+                observable(d);
+            });
+
+            //handle disposal
+            ko.utils.domNodeDisposal.addDisposeCallback(element, function() {
+                $el.flatpickr("destroy");
+            });
+
+            observable.subscribe(function(newVal) {
+                $el.val(picker.formatDate(options.dateFormat, newVal));
+            });
+
+            picker.setDate(ko.unwrap(observable));
+        }
+    };
 </script>
 
 
