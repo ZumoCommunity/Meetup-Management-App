@@ -17,10 +17,12 @@
 <div class="container-fluid">
     <div class="row">
         <div class="col-xs-12">
+
             <div class="form-group" data-bind="css: { 'has-error': !entity.Validation.isTitleValid() }">
                 <label for="meetupTitle">Meetup Title</label>
                 <input type="text" class="form-control" id="meetupTitle" placeholder="Title" data-bind="textInput: entity.model.Title">
             </div>
+
             <div class="form-group" data-bind="css: { 'has-error': !entity.Validation.isUriValid() }">
                 <label for="meetupURI">Meetup URI</label>
                 <input type="text" class="form-control" id="meetupURI" placeholder="URI" data-bind="textInput: entity.model.Uri">
@@ -54,6 +56,13 @@
                 <select class="form-control" id="meetupLocation" data-bind="value: entity.model.LocationId, foreach: { data: lists.locations }">
                     <option data-bind="text: $data.Title, value: $data.Id"></option>
                 </select>
+            </div>
+
+            <div class="form-group">
+                <label for="attendanceFee">Attendance Fee</label>
+                <input type="text" class="form-control" id="attendanceFee" placeholder="0" data-bind="textInput: entity.model.AttendanceFee">
+                <label for="AttendanceFeeCurency">Attendance Fee Curency</label>
+                <input type="text" class="form-control" id="AttendanceFeeCurency" placeholder="UAH" data-bind="textInput: entity.model.AttendanceFeeCurency">
             </div>
 
         </div>
