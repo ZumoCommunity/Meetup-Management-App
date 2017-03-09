@@ -1,9 +1,109 @@
 {{<layout}}
 {{$content}}
 
-    <div class="container-fluid">
-        <h1>Registrations list</h1>
+<div class="container-fluid">
+    <h1>Registrations list</h1>
+</div>
+
+<div class="container-fluid topBar">
+    <div class="row">
+        <div class="col-lg-4 col-md-4 col-sm-4 col-xs-4">
+            <div class="form-group">
+                <label for="meetup">Choose a Meetup</label>
+                <select class="form-control" id="meetup" data-bind="">
+                </select>
+            </div>
+        </div>
+
+        <div class="col-xs-8 col-sm-8 col-md-8 col-lg-8 btn-group" role="group" aria-label="create partner buttons">
+            <button type="button" class="btn btn-default" data-bind="click: grid.refreshGridPage">Refresh</button>
+        </div>
     </div>
+</div>
+
+<div class="container-fluid listContainer">
+    <div class="row listHeader">
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            Email
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            Full Name
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            Subscribed For News
+        </div>
+        <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3">
+            &nbsp;
+        </div>
+    </div>
+    <div data-bind="visible: !grid.isGridLoaded()">
+        Please wait...
+    </div>
+    <div data-bind="foreach: grid.gridArray, visible: grid.isGridLoaded()">
+        <div class="row listRow">
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-bind="text: Email">
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-bind="text: FullName">
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3" data-bind="text: IsSubscribeForNews">
+            </div>
+            <div class="col-xs-3 col-sm-3 col-md-3 col-lg-3 btn-group" role="group" aria-label="registrations buttons">
+                <a class="btn btn-warning" data-bind="attr: { href: '/registrations/entity?id=' + Id }">View</a>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-12 col-sm-12 col-md-12 col-lg-12">
+            <nav aria-label="Page navigation">
+                <ul class="pagination" data-bind="foreach: grid.totalPagesArray">
+                    <li data-bind="css: { 'active': $parent.grid.pageIsActive($data) }">
+                        <a href="#" data-bind="click: $parent.grid.navigateToItemPage"><span data-bind="text: $data"></span></a>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </div>
+</div>
+
+<script>
+    var viewModel = {
+    };
+
+    viewModel = addGridBehavior(viewModel, 'Registrations', 'Email');
+
+    viewModel.grid.getGridPage(viewModel.grid.currentPage());
+
+    viewModel.grid.MeetupsList = {};
+
+    viewModel.grid.getList = function (listName, orderBy) {
+        var table = o(listName);
+
+        table = table.orderBy(orderBy).inlineCount('true');
+
+        table.get()
+                .then(function(response) {
+                    viewModel.grid.MeetupsList.removeAll();
+
+                    var entities = response.data;
+
+                    entities.foreach(function(entity) {
+                        viewModel.grid.MeetupsList.push(entity);
+
+                        console.log(viewModel.grid.MeetupsList);
+                    }
+                    )
+                }
+                )
+    };
+
+    viewModel.grid.getList("Meetups", "Id");
+
+    ko.applyBindings(viewModel);
+</script>
+
 
 {{/content}}
 {{/layout}}

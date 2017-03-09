@@ -20,7 +20,7 @@
                 <li><a href="/Locations/List">Locations</a></li>
                 <li><a href="/Speakers/List">Speakers</a></li>
                 <li><a href="/Topics/List">Topics</a></li>
-                <li><a href="/Registrations">Registrations</a></li>
+                <li><a href="/Registrations/List">Registrations</a></li>
                 <li><a href="/Partners/List">Partners</a></li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
